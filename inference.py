@@ -59,6 +59,7 @@ def test_inference(
         # Sample the next token
         if do_sample:
             # Apply temperature
+            # 高温度（T > 1）：当温度较高时，logits 的差异被“平滑”，导致更均匀的分布。
             next_token_logits = torch.softmax(next_token_logits / temperature, dim=-1)
             next_token = _sample_top_p(next_token_logits, top_p)
         else:
